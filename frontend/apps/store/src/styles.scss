@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Import Angular Material theme stylesheet for proper layout and animations */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Custom styling for MDC and legacy MatSnackBar toast panels */
+.mat-mdc-snack-bar-container {
+  &.toast-success {
+    --mdc-snackbar-container-color: #059669; /* Emerald 600 */
+    --mdc-snackbar-supporting-text-color: #ffffff;
+    --mat-snack-bar-button-color: #ffffff;
+  }
+
+  &.toast-error {
+    --mdc-snackbar-container-color: #dc2626; /* Red 600 */
+    --mdc-snackbar-supporting-text-color: #ffffff;
+    --mat-snack-bar-button-color: #ffffff;
+  }
+
+  &.toast-info {
+    --mdc-snackbar-container-color: #2563eb; /* Blue 600 */
+    --mdc-snackbar-supporting-text-color: #ffffff;
+    --mat-snack-bar-button-color: #ffffff;
+  }
+
+  /* Premium Design Tweaks */
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  
+  .mdc-snackbar__surface {
+    border-radius: 12px !important;
+    padding: 6px 16px !important;
+  }
+
+  .mdc-snackbar__label {
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2px !important;
+  }
+
+  .mdc-snackbar__actions button {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+  }
+}
+
+/* Fallback styling for non-MDC or version-independent Angular Material Snackbars */
+.toast-success {
+  .mdc-snackbar__surface {
+    background-color: #059669 !important;
+  }
+  .mdc-snackbar__label, .mdc-snackbar__action {
+    color: #ffffff !important;
+  }
+}
+
+.toast-error {
+  .mdc-snackbar__surface {
+    background-color: #dc2626 !important;
+  }
+  .mdc-snackbar__label, .mdc-snackbar__action {
+    color: #ffffff !important;
+  }
+}
+
+.toast-info {
+  .mdc-snackbar__surface {
+    background-color: #2563eb !important;
+  }
+  .mdc-snackbar__label, .mdc-snackbar__action {
+    color: #ffffff !important;
+  }
+}

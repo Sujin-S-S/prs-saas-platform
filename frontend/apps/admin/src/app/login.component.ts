@@ -370,6 +370,7 @@ export class LoginComponent {
 
   logout(): void {
     this.auth.logout();
+    this.auth.setTenantId('sk47'); // Restore tenant context for merchant portal
     this.products.set([]);
     this.totalOrders.set(0);
     this.totalRevenue.set(0);

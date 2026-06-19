@@ -1,0 +1,115 @@
+<ui-loader [isLoading]="isLoading()" [message]="loaderMessage()"></ui-loader>
+
+<main class="catalog-wrapper">
+  <!-- Store Banner -->
+  <section class="store-banner">
+    <h2>Premium Menswear Collection</h2>
+    <p>Handcrafted shirts, high-grade denim, and Italian wool blazers.</p>
+  </section>
+
+  <!-- Main Catalog Grid -->
+  <div class="catalog-grid">
+    <!-- Products Section -->
+    <div class="products-section">
+      <div class="catalog-header-area">
+        <h3>Explore Catalog</h3>
+        
+        <div class="category-filters">
+          <button 
+            class="filter-pill" 
+            [class.active]="selectedCategoryId() === null" 
+            (click)="selectCategory(null)">
+            All Collection
+          </button>
+          <button 
+            *ngFor="let cat of categories()" 
+            class="filter-pill" 
+            [class.active]="selectedCategoryId() === cat.id" 
+            (click)="selectCategory(cat.id)">
+            {{ cat.name }}
+          </button>
+        </div>
+      </div>
+      <div class="product-cards">
+        <div class="product-card" *ngFor="let prod of products()">
+          <img [src]="prod.images?.[0]?.imageUrl || 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c'"
+            class="product-img" alt="Product Image">
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="product-sku">{{ prod.sku }}</span>
+              <span class="product-category">{{ prod.category?.name }}</span>
+            </div>
+            <h4>{{ prod.name }}</h4>
+            <p class="product-desc">{{ prod.description }}</p>
+
+            <!-- Variants Selection -->
+            <div class="variants-area" *ngIf="prod.variants && prod.variants.length > 0">
+              <label>Select Option:</label>
+              <select [(ngModel)]="selectedVariants[prod.id]" class="variant-select">
+                <option *ngFor="let v of prod.variants" [value]="v.id">
+                  {{ v.name }} (+{{ v.priceDifference | currency }}) - Stock: {{ v.stockQuantity }}
+                </option>
+              </select>
+            </div>
+
+            <div class="product-footer">
+              <span class="product-price">{{ prod.basePrice | currency }}</span>
+              <button class="add-to-cart-btn" (click)="addToCart(prod)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Summary Section -->
+    <div class="checkout-section">
+      <div class="checkout-card">
+        <h3>Shopping Cart</h3>
+
+        <div *ngIf="cartService.cart().length === 0" class="empty-cart">
+          <span class="material-icons">shopping_bag</span>
+          <p>Your cart is empty. Explore our catalog and add items.</p>
+        </div>
+
+        <div *ngIf="cartService.cart().length > 0" class="cart-items">
+          <div class="cart-item" *ngFor="let item of cartService.cart()">
+            <div class="item-details">
+              <h5>{{ item.product.name }}</h5>
+              <p class="item-variant">{{ item.variantName }}</p>
+            </div>
+            <div class="item-meta">
+              <span class="item-qty">Qty: {{ item.quantity }}</span>
+              <span class="item-price">{{ item.price | currency }}</span>
+            </div>
+          </div>
+
+          <div class="cart-summary">
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span>{{ cartService.cartSubtotal() | currency }}</span>
+            </div>
+
+            <!-- Coupon Code Section -->
+            <div class="coupon-area">
+              <input type="text" [(ngModel)]="couponCode" placeholder="Promo Code (e.g. SK47FIRST)"
+                class="coupon-input">
+              <button (click)="applyCoupon()" class="coupon-btn">Apply</button>
+            </div>
+
+            <div class="summary-row discount-row" *ngIf="discount() > 0">
+              <span>Discount (Coupon: {{ appliedCoupon() }})</span>
+              <span>-{{ discount() | currency }}</span>
+            </div>
+
+            <div class="summary-row total-row">
+              <span>Total Amount</span>
+              <span>{{ cartTotal() | currency }}</span>
+            </div>
+          </div>
+
+          <button class="checkout-btn" (click)="onCheckout()">Place Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

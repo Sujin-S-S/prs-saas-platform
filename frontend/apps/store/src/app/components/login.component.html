@@ -1,0 +1,121 @@
+<!-- Spinner loader overlay -->
+<ui-loader [isLoading]="isLoading()" [message]="loaderMessage()"></ui-loader>
+
+<div class="store-container login-mode">
+  <main class="login-split-container">
+    <!-- Left Side: Hero Image & Branding -->
+    <div class="login-hero-panel">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="material-icons hero-logo-icon">sports_martial_arts</span>
+        <span class="hero-brand-subtitle">THE ART OF TAILORING</span>
+        <h2 class="hero-brand-title">SK47 MENS WEAR</h2>
+        <div class="hero-divider"></div>
+        <p class="hero-tagline">Step into the world of luxury, craftsmanship, and timeless fashion.</p>
+      </div>
+    </div>
+
+    <div class="login-form-panel">
+      <div class="login-card" [class.register-mode]="!isLoginMode()">
+        <!-- Toggleable Headers -->
+        <div class="login-header" *ngIf="isLoginMode()">
+          <h2>Welcome Back</h2>
+          <p>Enter your credentials below to step back into style.</p>
+        </div>
+        <div class="login-header" *ngIf="!isLoginMode()">
+          <h2>Elevate Your Style</h2>
+          <p>Join the SK47 Club to unlock exclusive collections.</p>
+        </div>
+
+        <!-- SIGN IN FORM -->
+        <form *ngIf="isLoginMode()" (ngSubmit)="onLogin()" #loginForm="ngForm" class="login-form form-fade">
+          <!-- Email Input (Floating Label style) -->
+          <div class="input-wrapper" [class.has-value]="email">
+            <span class="material-icons input-icon">mail</span>
+            <input type="email" id="email" name="email" [(ngModel)]="email" required placeholder=" " class="form-input">
+            <label for="email" class="form-label">Email Address</label>
+          </div>
+
+          <!-- Password Input (Floating Label style with Visibility Toggle) -->
+          <div class="input-wrapper" [class.has-value]="password">
+            <span class="material-icons input-icon">lock</span>
+            <input [type]="showPassword() ? 'text' : 'password'" id="password" name="password" [(ngModel)]="password"
+              required placeholder=" " class="form-input">
+            <label for="password" class="form-label">Password</label>
+            <button type="button" class="password-toggle" (click)="togglePasswordVisibility()"
+              [title]="showPassword() ? 'Hide password' : 'Show password'">
+              <span class="material-icons">{{ showPassword() ? 'visibility_off' : 'visibility' }}</span>
+            </button>
+          </div>
+
+          <button type="submit" class="submit-btn" [disabled]="loginForm.invalid">
+            <span>Sign In</span>
+            <span class="material-icons btn-arrow">arrow_forward</span>
+          </button>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form *ngIf="!isLoginMode()" (ngSubmit)="onRegister()" #registerForm="ngForm" class="login-form form-fade">
+          <!-- First and Last Name (Inline Grid) -->
+          <div class="form-row">
+            <div class="input-wrapper" [class.has-value]="regFirstName">
+              <span class="material-icons input-icon">person</span>
+              <input type="text" id="regFirstName" name="regFirstName" [(ngModel)]="regFirstName" required
+                placeholder=" " autocomplete="given-name" class="form-input">
+              <label for="regFirstName" class="form-label">First Name</label>
+            </div>
+
+            <div class="input-wrapper" [class.has-value]="regLastName">
+              <span class="material-icons input-icon">person</span>
+              <input type="text" id="regLastName" name="regLastName" [(ngModel)]="regLastName" required placeholder=" "
+                autocomplete="family-name" class="form-input">
+              <label for="regLastName" class="form-label">Last Name</label>
+            </div>
+          </div>
+
+          <!-- Email Input -->
+          <div class="input-wrapper" [class.has-value]="regEmail">
+            <span class="material-icons input-icon">mail</span>
+            <input type="email" id="regEmail" name="regEmail" [(ngModel)]="regEmail" required placeholder=" "
+              autocomplete="new-email" class="form-input">
+            <label for="regEmail" class="form-label">Email Address</label>
+          </div>
+
+          <!-- Password Input -->
+          <div class="input-wrapper" [class.has-value]="regPassword">
+            <span class="material-icons input-icon">lock</span>
+            <input [type]="showPassword() ? 'text' : 'password'" id="regPassword" name="regPassword"
+              [(ngModel)]="regPassword" required minlength="6" placeholder=" " autocomplete="new-password"
+              class="form-input">
+            <label for="regPassword" class="form-label">Password (Min. 6 chars)</label>
+            <button type="button" class="password-toggle" (click)="togglePasswordVisibility()"
+              [title]="showPassword() ? 'Hide password' : 'Show password'">
+              <span class="material-icons">{{ showPassword() ? 'visibility_off' : 'visibility' }}</span>
+            </button>
+          </div>
+
+          <!-- Phone Input (Optional) -->
+          <div class="input-wrapper" [class.has-value]="regPhone">
+            <span class="material-icons input-icon">phone</span>
+            <input type="tel" id="regPhone" name="regPhone" [(ngModel)]="regPhone" placeholder=" " autocomplete="tel"
+              class="form-input">
+            <label for="regPhone" class="form-label">Phone Number (Optional)</label>
+          </div>
+
+          <button type="submit" class="submit-btn" [disabled]="registerForm.invalid">
+            <span>Create Account</span>
+            <span class="material-icons btn-arrow">arrow_forward</span>
+          </button>
+        </form>
+
+        <!-- Toggle Link Switcher -->
+        <div class="mode-toggle-link">
+          <span *ngIf="isLoginMode()">Don't have an account? <button type="button" class="link-btn"
+              (click)="toggleMode()">Create one</button></span>
+          <span *ngIf="!isLoginMode()">Already have an account? <button type="button" class="link-btn"
+              (click)="toggleMode()">Sign In</button></span>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

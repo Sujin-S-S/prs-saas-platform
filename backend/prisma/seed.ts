@@ -22,7 +22,7 @@ async function main() {
 
   const saltRounds = 10;
   const adminPasswordHash = await bcrypt.hash('admin123', saltRounds);
-  const customerPasswordHash = await bcrypt.hash('customer123', saltRounds);
+  const customerPasswordHash = await bcrypt.hash('Admin@1234', saltRounds);
 
   // 2. Create Super Admin (Global system user)
   const superAdmin = await prisma.user.create({
@@ -87,6 +87,24 @@ async function main() {
       name: 'Jackets & Blazers',
       slug: 'jackets-blazers',
       description: 'Outerwear, winter jackets and wool blazers'
+    }
+  });
+
+  const catA_4 = await prisma.category.create({
+    data: {
+      tenantId: tenantA.id,
+      name: 'Shoes & Accessories',
+      slug: 'shoes-accessories',
+      description: 'Premium leather boots, loafers, and designer belts'
+    }
+  });
+
+  const catA_5 = await prisma.category.create({
+    data: {
+      tenantId: tenantA.id,
+      name: 'Suits & Formalwear',
+      slug: 'suits-formalwear',
+      description: 'Luxury double-breasted suits and tuxedo ensembles'
     }
   });
 
@@ -214,13 +232,129 @@ async function main() {
     }
   });
 
+  // Product 4: Leather Oxford Shoes
+  const prodA_4 = await prisma.product.create({
+    data: {
+      tenantId: tenantA.id,
+      categoryId: catA_4.id,
+      name: 'Bespoke Leather Oxford Shoes',
+      sku: 'SK47-SHO-004',
+      description: 'Handcrafted Italian calfskin leather Oxford shoes in rich tan, featuring a polished finish.',
+      basePrice: 189.99,
+      stockQuantity: 20,
+      lowStockThreshold: 4
+    }
+  });
+
+  await prisma.productImage.create({
+    data: {
+      tenantId: tenantA.id,
+      productId: prodA_4.id,
+      imageUrl: 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?auto=format&fit=crop&w=500&q=80',
+      isPrimary: true
+    }
+  });
+
+  await prisma.productVariant.create({
+    data: {
+      tenantId: tenantA.id,
+      productId: prodA_4.id,
+      name: 'Color: Tan / Size: 10',
+      sku: 'SK47-SHO-004-TAN-10',
+      priceDifference: 0.00,
+      stockQuantity: 20
+    }
+  });
+
+  // Product 5: Slim Fit Navy Suit
+  const prodA_5 = await prisma.product.create({
+    data: {
+      tenantId: tenantA.id,
+      categoryId: catA_5.id,
+      name: 'Signature Navy Wool Suit',
+      sku: 'SK47-SUI-005',
+      description: 'Super 120s pure wool slim-fit navy suit, designed for high-profile weddings and business elegance.',
+      basePrice: 299.99,
+      stockQuantity: 10,
+      lowStockThreshold: 2
+    }
+  });
+
+  await prisma.productImage.create({
+    data: {
+      tenantId: tenantA.id,
+      productId: prodA_5.id,
+      imageUrl: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=500&q=80',
+      isPrimary: true
+    }
+  });
+
+  await prisma.productVariant.create({
+    data: {
+      tenantId: tenantA.id,
+      productId: prodA_5.id,
+      name: 'Navy / Size: 40R',
+      sku: 'SK47-SUI-005-NY-40R',
+      priceDifference: 0.00,
+      stockQuantity: 10
+    }
+  });
+
+  // Seed 50 extra items programmatically to test sliders
+  for (let i = 1; i <= 50; i++) {
+    let categoryId = catA_1.id;
+    if (i % 5 === 0) categoryId = catA_5.id;
+    else if (i % 5 === 1) categoryId = catA_1.id;
+    else if (i % 5 === 2) categoryId = catA_2.id;
+    else if (i % 5 === 3) categoryId = catA_3.id;
+    else if (i % 5 === 4) categoryId = catA_4.id;
+
+    const prod = await prisma.product.create({
+      data: {
+        tenantId: tenantA.id,
+        categoryId,
+        name: `Premium Men's Wear Item #${i}`,
+        sku: `SK47-ITEM-${String(i).padStart(3, '0')}`,
+        description: `Bespoke handcrafted collection item #${i}. High-grade fabric with tailored seams and modern profile.`,
+        basePrice: 39.99 + (i * 3.5),
+        stockQuantity: 20 + i,
+        lowStockThreshold: 5
+      }
+    });
+
+    // Seed Image
+    await prisma.productImage.create({
+      data: {
+        tenantId: tenantA.id,
+        productId: prod.id,
+        imageUrl: i % 2 === 0 
+          ? 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=500&q=80'
+          : 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=500&q=80',
+        isPrimary: true
+      }
+    });
+
+    // Seed Variant
+    await prisma.productVariant.create({
+      data: {
+        tenantId: tenantA.id,
+        productId: prod.id,
+        name: `Standard Option #${i}`,
+        sku: `SK47-ITEM-${String(i).padStart(3, '0')}-VAR`,
+        priceDifference: 0.00,
+        stockQuantity: 20 + i
+      }
+    });
+  }
+
+
   // Tenant A Customer
   const customerA = await prisma.customer.create({
     data: {
       tenantId: tenantA.id,
       firstName: 'Sujin',
       lastName: 'S',
-      email: 'sujin@ss.com',
+      email: 'sujinss2702@gmail.com',
       passwordHash: customerPasswordHash,
       phone: '415-888-9999'
     }

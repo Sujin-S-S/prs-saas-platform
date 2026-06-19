@@ -1,1 +1,104 @@
-<router-outlet></router-outlet>
+<div class="app-layout">
+  <!-- Premium Header Navigation Bar -->
+  <header class="app-navbar" *ngIf="!isLoginPage()">
+    <div class="nav-container">
+      <!-- Mobile Hamburger Button (Left on mobile, hidden on desktop) -->
+      <button class="mobile-menu-btn" (click)="toggleMobileDrawer($event)">
+        <span class="material-icons">menu</span>
+      </button>
+
+      <!-- Store Brand -->
+      <div class="nav-brand" (click)="navigateHome()">
+        <span class="material-icons brand-icon">sports_martial_arts</span>
+        <span class="brand-text">SK47 MENS WEAR</span>
+      </div>
+
+      <!-- Middle: Navigation Links (Desktop Only) -->
+      <nav class="nav-menu desktop-only">
+        <a routerLink="/products" routerLinkActive="active-link" class="nav-link">Products</a>
+        <a routerLink="/about" routerLinkActive="active-link" class="nav-link">About Us</a>
+        <a routerLink="/contact" routerLinkActive="active-link" class="nav-link">Contact Us</a>
+      </nav>
+
+      <!-- Right: Action Icons -->
+      <div class="nav-actions">
+        <!-- Cart Action with Count Badge -->
+        <div class="cart-action" (click)="scrollToCart()">
+          <span class="material-icons action-icon">shopping_bag</span>
+          <span class="cart-badge" *ngIf="cartService.cartCount() > 0">{{ cartService.cartCount() }}</span>
+        </div>
+
+        <!-- Profile / Account Action -->
+        <div class="profile-action" (click)="toggleProfileMenu()">
+          <span class="material-icons action-icon">person</span>
+          <span class="user-name" *ngIf="auth.isAuthenticated()">{{ auth.currentUser()?.firstName }}</span>
+          
+          <!-- Profile Dropdown Menu -->
+          <div class="profile-dropdown" *ngIf="showProfileDropdown" (click)="$event.stopPropagation()">
+            <div class="dropdown-header" *ngIf="auth.isAuthenticated()">
+              <p class="user-email">{{ auth.currentUser()?.email }}</p>
+            </div>
+            <button class="dropdown-btn" *ngIf="!auth.isAuthenticated()" (click)="goToLogin()">Sign In</button>
+            <button class="dropdown-btn logout" *ngIf="auth.isAuthenticated()" (click)="logout()">Sign Out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Side Drawer Overlay -->
+    <div class="drawer-overlay" [class.active]="showMobileDrawer" (click)="closeMobileDrawer()"></div>
+
+    <!-- Mobile Side Drawer Panel -->
+    <div class="mobile-drawer" [class.open]="showMobileDrawer">
+      <div class="drawer-header">
+        <div class="drawer-brand" (click)="navigateHome(); closeMobileDrawer()">
+          <span class="material-icons brand-icon">sports_martial_arts</span>
+          <span class="brand-text">SK47 MENS WEAR</span>
+        </div>
+        <button class="drawer-close-btn" (click)="closeMobileDrawer()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <nav class="drawer-nav">
+        <a routerLink="/products" routerLinkActive="active-link" (click)="closeMobileDrawer()" class="drawer-link">Products</a>
+        <a routerLink="/about" routerLinkActive="active-link" (click)="closeMobileDrawer()" class="drawer-link">About Us</a>
+        <a routerLink="/contact" routerLinkActive="active-link" (click)="closeMobileDrawer()" class="drawer-link">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Content Space -->
+  <div class="app-content">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- Premium Footer -->
+  <footer class="app-footer" *ngIf="!isLoginPage()">
+    <div class="footer-container">
+      <div class="footer-section brand">
+        <div class="footer-brand">
+          <span class="material-icons">sports_martial_arts</span>
+          <h4>SK47 MENS WEAR</h4>
+        </div>
+        <p>Luxury craftsmanship, premium fabrics, and timeless fashion tailored for the modern gentleman.</p>
+      </div>
+
+      <div class="footer-section links">
+        <h5>Quick Links</h5>
+        <a routerLink="/products">Products</a>
+        <a routerLink="/about">About Us</a>
+        <a routerLink="/contact">Contact Us</a>
+      </div>
+
+      <div class="footer-section contact">
+        <h5>Customer Support</h5>
+        <p><span class="material-icons">place</span> 789 Fashion Avenue, NY 10018</p>
+        <p><span class="material-icons">phone</span> +1 (212) 555-0147</p>
+        <p><span class="material-icons">mail</span> support&#64;sk47menswear.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SK47 Mens Wear. All rights reserved.</p>
+    </div>
+  </footer>
+</div>

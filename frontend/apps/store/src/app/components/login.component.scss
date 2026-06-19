@@ -1,0 +1,389 @@
+.store-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.store-container.login-mode {
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.store-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 24px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.store-icon {
+  font-size: 32px;
+  color: #1e293b;
+}
+.logo-area h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #1e293b;
+}
+.user-greeting {
+  font-size: 14px;
+  margin-right: 16px;
+  color: #64748b;
+}
+.logout-btn {
+  background: none;
+  border: 1px solid #cbd5e1;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.logout-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+/* PREMIUM SPLIT LOGIN DESIGN */
+.login-split-container {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  min-height: 100vh;
+  background-color: #0b0f19;
+  overflow: hidden;
+}
+
+/* Left Hero Panel */
+.login-hero-panel {
+  position: relative;
+  background-image: url('/luxury_menswear_hero.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  color: white;
+}
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(11, 15, 25, 0.9) 0%, rgba(27, 38, 59, 0.6) 100%);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-logo-icon {
+  font-size: 64px;
+  color: #c5a880;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 2px 8px rgba(197, 168, 128, 0.3));
+  animation: floatLogo 6s ease-in-out infinite;
+}
+.hero-brand-subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: #c5a880;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.hero-brand-title {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+.hero-divider {
+  width: 60px;
+  height: 2px;
+  background-color: #c5a880;
+  margin: 24px 0;
+}
+.hero-tagline {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin: 0;
+  font-weight: 300;
+}
+
+/* Right Form Panel */
+.login-form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color: #0b0f19;
+  position: relative;
+}
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(17, 24, 39, 0.95);
+  padding: 40px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.login-card:hover {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+.login-header {
+  text-align: center;
+}
+.login-header h2 {
+  margin: 0 0 10px 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+.login-header p {
+  margin: 0 0 32px 0;
+  font-size: 14px;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* Interactive Inputs (Floating labels) */
+.input-wrapper {
+  position: relative;
+  margin-bottom: 24px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  transition: border-color 0.3s ease;
+}
+.input-wrapper:focus-within {
+  border-color: #c5a880;
+}
+.input-icon {
+  position: absolute;
+  left: 0;
+  bottom: 12px;
+  color: #64748b;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+.input-wrapper:focus-within .input-icon {
+  color: #c5a880;
+}
+.form-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 10px 12px 10px 32px;
+  box-sizing: border-box;
+  font-size: 15px;
+  color: #ffffff;
+  outline: none;
+  font-family: inherit;
+  height: 44px;
+}
+.form-label {
+  position: absolute;
+  left: 32px;
+  bottom: 12px;
+  font-size: 14px;
+  color: #64748b;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Floating Behavior */
+.input-wrapper:focus-within .form-label,
+.input-wrapper.has-value .form-label,
+.form-input:not(:placeholder-shown) ~ .form-label,
+.form-input:-webkit-autofill ~ .form-label {
+  transform: translateY(-26px);
+  font-size: 12px;
+  color: #c5a880;
+  left: 0;
+}
+
+/* Custom Autofill Styles to prevent yellow browser backgrounds */
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover, 
+.form-input:-webkit-autofill:focus, 
+.form-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #111827 inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Password eye button */
+.password-toggle {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+.password-toggle:hover {
+  color: #c5a880;
+}
+.password-toggle span {
+  font-size: 20px;
+}
+
+/* Custom Submit Button */
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #c5a880 0%, #b39266 100%);
+  color: #0b0f19;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(197, 168, 128, 0.2);
+}
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(197, 168, 128, 0.35);
+  background: linear-gradient(135deg, #d3b993 0%, #c5a880 100%);
+}
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+.submit-btn:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: #64748b;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.btn-arrow {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+.submit-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Registration Layout & Transitions */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+.mode-toggle-link {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: #94a3b8;
+}
+.link-btn {
+  background: none;
+  border: none;
+  color: #c5a880;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 4px;
+  font-family: inherit;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+.link-btn:hover {
+  color: #d3b993;
+}
+.form-fade {
+  animation: formFadeIn 0.4s ease-out;
+}
+@keyframes formFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Floating Logo Animation */
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Responsive Design for Split-Pane */
+@media (max-width: 868px) {
+  .login-split-container {
+    grid-template-columns: 1fr;
+  }
+  .login-hero-panel {
+    display: none;
+  }
+  .login-form-panel {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    align-items: flex-start;
+    padding: 80px 20px 40px;
+  }
+  .login-card {
+    position: relative;
+    z-index: 1;
+    background: #0b0f19 !important;
+    border: 1px solid rgba(197, 168, 128, 0.25) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(197, 168, 128, 0.15) !important;
+  }
+}
+
+/* Register Mode overrides to prevent vertical scrollbar */
+.login-card.register-mode {
+  padding: 24px 32px;
+}
+.login-card.register-mode .login-header p {
+  margin-bottom: 16px;
+}
+.login-card.register-mode .input-wrapper {
+  margin-bottom: 16px;
+}
+.login-card.register-mode .mode-toggle-link {
+  margin-top: 16px;
+}

@@ -1,0 +1,121 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="material-icons hero-logo-icon">sports_martial_arts</span>
+      <span class="hero-brand-subtitle">THE ART OF TAILORING</span>
+      <h1 class="hero-brand-title">SK47 MENS WEAR</h1>
+      <div class="hero-divider"></div>
+      <p class="hero-tagline">Step into the world of luxury, craftsmanship, and timeless fashion.</p>
+      <button class="shop-btn" (click)="goToProducts()">
+        <span>Explore Collection</span>
+        <span class="material-icons btn-arrow">arrow_forward</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Categories Slider Section -->
+  <section class="slider-section categories-section">
+    <div class="section-header">
+      <h2>Curated Categories</h2>
+      <p>Explore our premium categories handcrafted for the modern wardrobe.</p>
+    </div>
+
+    <div class="slider-outer-container">
+      <button class="slider-arrow prev" (click)="prevCategory()" aria-label="Previous category" *ngIf="categories().length > visibleCards()">
+        <span class="material-icons">keyboard_arrow_left</span>
+      </button>
+
+      <div class="slider-viewport">
+        <div class="slider-track" [style.transform]="'translateX(' + (currentCategoryIndex() * -100 / visibleCards()) + '%)'">
+          <div class="slide-item" *ngFor="let cat of categories(); let i = index" 
+               [style.flex]="'0 0 ' + (100 / visibleCards()) + '%'"
+               [style.width]="(100 / visibleCards()) + '%'"
+               [class.active]="i >= currentCategoryIndex() && i < currentCategoryIndex() + visibleCards()">
+            <div class="category-card" (click)="goToCategory(cat.id)">
+              <div class="category-icon-wrapper">
+                <span class="material-icons category-icon">{{ getCategoryIcon(cat.slug) }}</span>
+              </div>
+              <h3 class="category-title">Bespoke {{ cat.name }}</h3>
+              <p class="category-description">{{ cat.description || 'Elevate your wardrobe with our premium ' + cat.name + ' selection.' }}</p>
+              <span class="category-link-btn">
+                <span>View Collection</span>
+                <span class="material-icons">arrow_forward</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="slider-arrow next" (click)="nextCategory()" aria-label="Next category" *ngIf="categories().length > visibleCards()">
+        <span class="material-icons">keyboard_arrow_right</span>
+      </button>
+    </div>
+
+    <!-- Dots Indicators -->
+    <div class="slider-indicators" *ngIf="categories().length > visibleCards()">
+      <span *ngFor="let cat of categories(); let i = index" 
+            class="indicator-dot" 
+            [class.active]="i === currentCategoryIndex()"
+            (click)="currentCategoryIndex.set(i)">
+      </span>
+    </div>
+  </section>
+
+  <!-- Featured Products Slider Section -->
+  <section class="slider-section products-section">
+    <div class="section-header">
+      <h2>Featured Products</h2>
+      <p>Luxury craftsmanship, premium fabrics, and timeless styles.</p>
+    </div>
+
+    <div class="slider-outer-container">
+      <button class="slider-arrow prev" (click)="prevProduct()" aria-label="Previous product" *ngIf="products().length > visibleCards()">
+        <span class="material-icons">keyboard_arrow_left</span>
+      </button>
+
+      <div class="slider-viewport">
+        <div class="slider-track" [style.transform]="'translateX(' + (currentProductIndex() * -100 / visibleCards()) + '%)'">
+          <div class="slide-item" *ngFor="let prod of products(); let i = index" 
+               [style.flex]="'0 0 ' + (100 / visibleCards()) + '%'"
+               [style.width]="(100 / visibleCards()) + '%'"
+               [class.active]="i >= currentProductIndex() && i < currentProductIndex() + visibleCards()">
+            <div class="product-slider-card" (click)="goToProducts()">
+              <div class="product-img-side">
+                <img [src]="prod.images?.[0]?.imageUrl || 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c'" 
+                     class="product-image" alt="{{ prod.name }}">
+                <span class="product-badge">{{ prod.category?.name || 'New' }}</span>
+              </div>
+              <div class="product-info-side">
+                <span class="product-sku">{{ prod.sku }}</span>
+                <h3 class="product-name">{{ prod.name }}</h3>
+                <p class="product-desc">{{ prod.description }}</p>
+                <div class="product-price-action">
+                  <span class="product-price">{{ prod.basePrice | currency }}</span>
+                  <span class="shop-now-btn">
+                    <span>Shop Now</span>
+                    <span class="material-icons">arrow_forward</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="slider-arrow next" (click)="nextProduct()" aria-label="Next product" *ngIf="products().length > visibleCards()">
+        <span class="material-icons">keyboard_arrow_right</span>
+      </button>
+    </div>
+
+    <!-- Dots Indicators -->
+    <div class="slider-indicators" *ngIf="products().length > visibleCards()">
+      <span *ngFor="let prod of products(); let i = index" 
+            class="indicator-dot" 
+            [class.active]="i === currentProductIndex()"
+            (click)="currentProductIndex.set(i)">
+      </span>
+    </div>
+  </section>
+</div>
