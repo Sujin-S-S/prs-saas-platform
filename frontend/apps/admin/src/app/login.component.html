@@ -1,0 +1,129 @@
+<div class="auth-container">
+
+  <!-- LEFT SIDE -->
+
+  <div class="left-panel">
+    <div class="brand-content">
+
+      <div class="logo">✦</div>
+
+      <h5>THE ART OF TAILORING</h5>
+
+      <h1>SK47 MENS WEAR</h1>
+
+      <div class="divider"></div>
+
+      <p>
+        Step into the world of luxury,
+        craftsmanship and timeless fashion.
+      </p>
+
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE -->
+
+  <div class="right-panel">
+
+    <div class="form-card">
+
+      <!-- LOGIN -->
+
+      <div *ngIf="!isSignup">
+
+        <h2>Welcome Back</h2>
+
+        <p class="subtitle">
+          Enter your credentials below to step back into style.
+        </p>
+
+        <div class="input-group">
+          <input
+            type="email"
+            placeholder="Email Address"
+          >
+        </div>
+
+        <div class="input-group">
+          <input
+            type="password"
+            placeholder="Password"
+          >
+        </div>
+
+        <button class="btn-primary" (click)="login()">
+          Sign In →
+        </button>
+
+        <p class="footer-text">
+          Don't have an account?
+          <span (click)="toggleForm()">
+            Create One
+          </span>
+        </p>
+
+      </div>
+
+      <!-- SIGNUP -->
+
+      <div *ngIf="isSignup">
+
+        <h2>Elevate Your Style</h2>
+
+        <div class="row">
+
+          <div class="input-group">
+            <input
+              type="text"
+              placeholder="First Name"
+            >
+          </div>
+
+          <div class="input-group">
+            <input
+              type="text"
+              placeholder="Last Name"
+            >
+          </div>
+
+        </div>
+
+        <div class="input-group">
+          <input
+            type="email"
+            placeholder="Email Address"
+          >
+        </div>
+
+        <div class="input-group">
+          <input
+            type="password"
+            placeholder="Password"
+          >
+        </div>
+
+        <div class="input-group">
+          <input
+            type="text"
+            placeholder="Phone Number"
+          >
+        </div>
+
+        <button class="btn-primary">
+          Create Account →
+        </button>
+
+        <p class="footer-text">
+          Already have an account?
+          <span (click)="toggleForm()">
+            Sign In
+          </span>
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
