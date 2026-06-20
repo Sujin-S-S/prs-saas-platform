@@ -1,129 +1,99 @@
+<!-- Include Font Awesome in the <head> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <div class="auth-container">
-
   <!-- LEFT SIDE -->
-
   <div class="left-panel">
     <div class="brand-content">
-
       <div class="logo">✦</div>
-
       <h5>THE ART OF TAILORING</h5>
-
       <h1>SK47 MENS WEAR</h1>
-
       <div class="divider"></div>
-
-      <p>
-        Step into the world of luxury,
-        craftsmanship and timeless fashion.
-      </p>
-
+      <p> Step into the world of luxury, craftsmanship and timeless fashion. </p>
     </div>
   </div>
 
-  <!-- RIGHT SIDE -->
-
+  <!-- RIGHT PANEL -->
   <div class="right-panel">
-
     <div class="form-card">
 
-      <!-- LOGIN -->
-
+      <!-- LOGIN SECTION -->
       <div *ngIf="!isSignup">
-
         <h2>Welcome Back</h2>
+        <p class="subtitle">Enter your credentials below to step back into style.</p>
 
-        <p class="subtitle">
-          Enter your credentials below to step back into style.
-        </p>
-
+        <!-- Email Input -->
         <div class="input-group">
-          <input
-            type="email"
-            placeholder="Email Address"
-          >
+          <div class="input-wrapper">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Email Address">
+          </div>
         </div>
 
+        <!-- Password Input -->
         <div class="input-group">
-          <input
-            type="password"
-            placeholder="Password"
-          >
+          <div class="input-wrapper">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password">
+          </div>
         </div>
 
-        <button class="btn-primary" (click)="login()">
-          Sign In →
-        </button>
-
+        <button class="btn-primary" (click)="login()">Sign In →</button>
         <p class="footer-text">
           Don't have an account?
-          <span (click)="toggleForm()">
-            Create One
-          </span>
+          <span (click)="toggleForm()">Create One</span>
         </p>
-
       </div>
 
-      <!-- SIGNUP -->
-
+      <!-- SIGNUP SECTION -->
       <div *ngIf="isSignup">
-
         <h2>Elevate Your Style</h2>
-
         <div class="row">
-
+          <!-- First Name -->
           <div class="input-group">
-            <input
-              type="text"
-              placeholder="First Name"
-            >
+            <div class="input-wrapper">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="First Name">
+            </div>
           </div>
-
+          <!-- Last Name -->
           <div class="input-group">
-            <input
-              type="text"
-              placeholder="Last Name"
-            >
+            <div class="input-wrapper">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Last Name">
+            </div>
           </div>
-
         </div>
 
+        <!-- Signup Email -->
         <div class="input-group">
-          <input
-            type="email"
-            placeholder="Email Address"
-          >
+          <div class="input-wrapper">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Email Address">
+          </div>
         </div>
-
+        <!-- Signup Password -->
         <div class="input-group">
-          <input
-            type="password"
-            placeholder="Password"
-          >
+          <div class="input-wrapper">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password">
+          </div>
         </div>
-
+        <!-- Phone Number -->
         <div class="input-group">
-          <input
-            type="text"
-            placeholder="Phone Number"
-          >
+          <div class="input-wrapper">
+            <i class="fas fa-phone"></i>
+            <input type="text" placeholder="Phone Number">
+          </div>
         </div>
 
-        <button class="btn-primary">
-          Create Account →
-        </button>
-
+        <button class="btn-primary">Create Account →</button>
         <p class="footer-text">
           Already have an account?
-          <span (click)="toggleForm()">
-            Sign In
-          </span>
+          <span (click)="toggleForm()">Sign In</span>
         </p>
-
       </div>
 
     </div>
-
   </div>
-
 </div>
